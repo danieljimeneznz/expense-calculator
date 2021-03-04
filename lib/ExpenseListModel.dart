@@ -24,11 +24,11 @@ class ExpenseListModel extends Model {
   }
 
   Expense byId(int id) {
-    _items.forEach((e) {
+    for(Expense e in _items) {
       if (e.id == id) {
         return e;
       }
-    });
+    }
     return null;
   }
 

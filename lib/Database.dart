@@ -28,7 +28,7 @@ class SQLiteDbProvider {
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
       await db.execute(
-          "CREATE TABLE IF NOT EXISTS expense (id INTEGER PRIMARY KEY, amount REAL, date TEXT, category TEXT)");
+          "CREATE TABLE IF NOT EXISTS expense (id INTEGER PRIMARY KEY AUTOINCREMENT, amount REAL, date TEXT, category TEXT)");
     });
   }
 
@@ -55,11 +55,7 @@ class SQLiteDbProvider {
 
   Future<Expense> insert(Expense expense) async {
     final db = await database;
-    List<Map> maxIdResult =
-        await db.rawQuery("SELECT MAX(id)+1 as last_inserted_id FROM expense");
-    int id = maxIdResult.isNotEmpty ? maxIdResult.first["last_insert_id"] : 0;
-    await db.insert("expense", {
-      "id": id,
+    int id = await db.insert("expense", {
       "amount": expense.amount,
       "date": expense.date.toString(),
       "category": expense.category
