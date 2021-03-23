@@ -1,4 +1,4 @@
-# expense_calculator
+# Expense Calculator
 
 Implementation of Tutorials Point Flutter Expense Calculator
 https://www.tutorialspoint.com/flutter/flutter_writing_advanced_applications.htm
